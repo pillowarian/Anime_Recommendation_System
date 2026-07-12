@@ -10,10 +10,9 @@ movies = pickle.load(
     open("anime_list.pkl","rb")
 )
 
-similarity = pickle.load(
-    open("similarity.pkl","rb")
+recommendations = pickle.load(
+open("recommendations.pkl","rb")
 )
-
 
 
 # -----------------------
@@ -22,36 +21,62 @@ similarity = pickle.load(
 
 def recommend(anime):
 
-    index = movies[
+    # Find selected anime MAL_ID
+
+    anime_id = movies[
         movies['title']==anime
-    ].index[0]
+    ]['MAL_ID'].values[0]
 
 
-    distances = sorted(
-        list(enumerate(similarity[index])),
-        reverse=True,
-        key=lambda x:x[1]
-    )
-
-    names = []
-    posters = []
-    studios = []
+    recommended_names = []
+    recommended_posters = []
+    recommended_studios = []
     scores = []
 
-    for i in distances[1:6]:
-        row = movies.iloc[i[0]]
 
-        names.append(row['title'])
+    # Get stored recommendations
 
-        posters.append(row['image_jpg_large_url'])
-
-        studios.append(row['studios'])
-
-        scores.append(round(i[1] * 100, 2))
+    for item in recommendations[anime_id]:
 
 
-    return names,posters,studios,scores
+        recommended_id = item['MAL_ID']
 
+        score = item['score']
+
+
+        # Find anime details
+
+        anime_info = movies[
+            movies['MAL_ID']==recommended_id
+        ].iloc[0]
+
+
+        recommended_names.append(
+            anime_info['title']
+        )
+
+
+        recommended_posters.append(
+            anime_info['image_jpg_large_url']
+        )
+
+
+        recommended_studios.append(
+            anime_info['studios']
+        )
+
+
+        scores.append(
+            round(score*100,2)
+        )
+
+
+    return (
+        recommended_names,
+        recommended_posters,
+        recommended_studios,
+        scores
+    )
 
 
 # -----------------------
