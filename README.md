@@ -239,24 +239,14 @@ http://localhost:8501
 
 # 📸 Application Preview
 
-(Add screenshots here)
+## Home Page
 
-Example:
-
-```
-Input Anime:
-
-Naruto
+<img src="Images/homepage.png" width="800">
 
 
-Recommendations:
+## Recommendation Result
 
-1. Bleach
-2. One Piece
-3. Hunter x Hunter
-4. Black Clover
-5. Dragon Ball
-```
+<img src="Images/accuracy.png" width="800">```
 
 ---
 
@@ -289,7 +279,7 @@ Possible future improvements:
 
 # 👨‍💻 Author
 
-**Your Name**
+**MD Hasin Anjum**
 
 Machine Learning | Data Science | Python
 
